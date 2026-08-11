@@ -1,0 +1,207 @@
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+:root {
+  --nav-height: 64px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #050505;
+  color: #F5F7FA;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Desktop: hide default cursor for custom cursor */
+@media (min-width: 769px) {
+  body { cursor: none; }
+  a, button, [role="button"] { cursor: none; }
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb {
+  background: rgba(110,231,255,0.25);
+  border-radius: 2px;
+}
+
+/* ── Selection ───────────────────────────────────────────────────────────── */
+::selection { background: rgba(110,231,255,0.18); color: #6EE7FF; }
+
+/* ── Typography helpers ──────────────────────────────────────────────────── */
+.font-clash { font-family: var(--font-clash, 'Arial Black', sans-serif); }
+.font-mono  { font-family: var(--font-mono, 'Courier New', monospace); }
+.font-dm    { font-family: var(--font-dm, 'Arial', sans-serif); }
+
+.gradient-text {
+  background: linear-gradient(120deg, #F5F7FA 0%, #6EE7FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glass surfaces ──────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.02);
+  border: 0.5px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.glass-strong {
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* ── Marquee ─────────────────────────────────────────────────────────────── */
+.marquee-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track { display: flex; width: max-content; }
+.marquee-fwd { animation: marquee-fwd 40s linear infinite; }
+.marquee-rev { animation: marquee-rev 40s linear infinite; }
+
+.marquee-wrap:hover .marquee-fwd,
+.marquee-wrap:hover .marquee-rev { animation-play-state: paused; }
+
+/* ── Section layout ──────────────────────────────────────────────────────── */
+.section-x {
+  padding-left: clamp(24px, 5vw, 80px);
+  padding-right: clamp(24px, 5vw, 80px);
+}
+.section-y {
+  padding-top: clamp(80px, 10vw, 140px);
+  padding-bottom: clamp(80px, 10vw, 140px);
+}
+.max-content { max-width: 1400px; margin: 0 auto; }
+
+/* ── Ghost section number ────────────────────────────────────────────────── */
+.ghost-num {
+  font-family: var(--font-clash, 'Arial Black', sans-serif);
+  font-size: clamp(100px, 18vw, 200px);
+  font-weight: 700;
+  color: rgba(255,255,255,0.025);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Hover underline ─────────────────────────────────────────────────────── */
+.hover-line {
+  position: relative;
+  display: inline-block;
+}
+.hover-line::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 0.5px;
+  background: currentColor;
+  transition: width 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.hover-line:hover::after { width: 100%; }
+
+/* ── Timeline line draw ──────────────────────────────────────────────────── */
+.timeline-svg-line {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.22,1,0.36,1);
+}
+.timeline-svg-line.drawn { stroke-dashoffset: 0; }
+
+/* ── Project card canvas ─────────────────────────────────────────────────── */
+.project-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Custom cursor ───────────────────────────────────────────────────────── */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #F5F7FA;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s, height 0.15s, background 0.15s;
+}
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(110,231,255,0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+.cursor-dot.hovering  { width: 4px; height: 4px; background: #6EE7FF; }
+.cursor-ring.hovering { width: 52px; height: 52px; border-color: rgba(110,231,255,0.8); }
+
+/* ── Stack grid ──────────────────────────────────────────────────────────── */
+.stack-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 0.5px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  font-size: 12px;
+  color: #8B95A7;
+  font-family: var(--font-mono, monospace);
+  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+.stack-pill:hover {
+  border-color: rgba(110,231,255,0.4);
+  color: #6EE7FF;
+}
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes marquee-fwd {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-10px); }
+}
+@keyframes scroll-cue {
+  0%,100% { opacity:1; transform: translateY(0); }
+  50%     { opacity:0.4; transform: translateY(7px); }
+}
+@keyframes cursor-blink {
+  0%,100% { opacity:1; }
+  50%     { opacity:0; }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
