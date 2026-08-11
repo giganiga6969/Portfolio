@@ -1,8 +1,7 @@
 # Ayush Mittal — Portfolio
 
-Personal portfolio for Ayush Mittal, AI Engineer and CS student at PES University, Bengaluru.
+Personal portfolio for me.An AI Engineer and CS student at PES University, Bengaluru.
 
-Built to communicate one thing clearly: **this person ships real systems.**
 
 ---
 
@@ -114,7 +113,7 @@ cp /path/to/your/resume.pdf public/resume.pdf
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open https://portfolio-bwr2jeapa-ayush-mittals-projects-a2ebfe58.vercel.app/
 
 ---
 
