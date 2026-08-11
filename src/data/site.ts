@@ -99,7 +99,7 @@ export const siteConfig = {
   email: 'ayushmittal1411@gmail.com',
   github: 'https://github.com/giganiga6969',
   linkedin: 'https://linkedin.com/in/ayush-mittal-1249b527a',
-  resume: '/resume.pdf',
+  resume: '/ayush-mittal-resume-2026.pdf',
   tagline: 'Working on a technical problem?',
   taglineSub: "Let's talk.",
 }
